@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.nozomcontrol_2.mvpmovieapp.R;
+import com.example.nozomcontrol_2.mvpmovieapp.data.MovieInfo;
 
 public class MovieDetailActivity extends AppCompatActivity {
 
@@ -14,10 +15,11 @@ public class MovieDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
         Intent intent = getIntent();
-        if(intent.hasExtra(getString(R.string.MovieDetailsIntentExtra))){
-            String itemIndex = intent.getStringExtra(getString(R.string.MovieDetailsIntentExtra));
-            Toast.makeText(this, itemIndex, Toast.LENGTH_SHORT).show();
-        }else
-            Toast.makeText(this, "Wrbna Fady", Toast.LENGTH_SHORT).show();
+        MovieInfo movieInfo = intent.getParcelableExtra(getString(R.string.MovieDetailsIntentExtra));
+//        if(intent.hasExtra(getString(R.string.MovieDetailsIntentExtra))){
+//            String itemIndex = intent.getStringExtra(getString(R.string.MovieDetailsIntentExtra));
+//            Toast.makeText(this, itemIndex, Toast.LENGTH_SHORT).show();
+//        }else
+//            Toast.makeText(this, "Wrbna Fady", Toast.LENGTH_SHORT).show();
     }
 }

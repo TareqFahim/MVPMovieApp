@@ -2,6 +2,7 @@ package com.example.nozomcontrol_2.mvpmovieapp.ui.presenters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 
 import com.example.nozomcontrol_2.mvpmovieapp.BuildConfig;
 import com.example.nozomcontrol_2.mvpmovieapp.R;
@@ -32,7 +33,8 @@ public class MainMovieGridPresenter  {
 
     public void viewMovieDetails(int gridItemIndex, Context context){
         Intent movieDetailsActivityIntent = new Intent(context, MovieDetailActivity.class);
-        movieDetailsActivityIntent.putExtra(context.getString(R.string.MovieDetailsIntentExtra), Integer.toString(gridItemIndex));
+//        movieDetailsActivityIntent.putExtra(context.getString(R.string.MovieDetailsIntentExtra), Integer.toString(gridItemIndex));
+        movieDetailsActivityIntent.putExtra(context.getString(R.string.MovieDetailsIntentExtra), (Parcelable) movieList.get(gridItemIndex));
         context.startActivity(movieDetailsActivityIntent);
     }
 

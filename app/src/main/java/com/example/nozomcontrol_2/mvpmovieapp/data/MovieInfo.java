@@ -1,5 +1,8 @@
 package com.example.nozomcontrol_2.mvpmovieapp.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Administrator on 25/03/2018.
  */
 
-public class MovieInfo {
+public class MovieInfo implements Parcelable {
     @SerializedName("poster_path")
     @Expose
     private String posterPath;
@@ -31,6 +34,27 @@ public class MovieInfo {
     @SerializedName("id")
     @Expose
     private String id;
+
+    protected MovieInfo(Parcel in) {
+        posterPath = in.readString();
+        title = in.readString();
+        overview = in.readString();
+        releaseDate = in.readString();
+        voteAverage = in.readString();
+        id = in.readString();
+    }
+
+    public static final Creator<MovieInfo> CREATOR = new Creator<MovieInfo>() {
+        @Override
+        public MovieInfo createFromParcel(Parcel in) {
+            return new MovieInfo(in);
+        }
+
+        @Override
+        public MovieInfo[] newArray(int size) {
+            return new MovieInfo[size];
+        }
+    };
 
     public String getPosterPath(){
         return posterPath;
@@ -65,4 +89,19 @@ public class MovieInfo {
 
     public String getId() { return id; }
     public void setId(String id){this.id = id;}
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(posterPath);
+        dest.writeString(title);
+        dest.writeString(overview);
+        dest.writeString(releaseDate);
+        dest.writeString(voteAverage);
+        dest.writeString(id);
+    }
 }
