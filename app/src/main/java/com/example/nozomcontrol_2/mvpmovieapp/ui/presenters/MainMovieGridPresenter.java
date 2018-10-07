@@ -33,8 +33,7 @@ public class MainMovieGridPresenter  {
 
     public void viewMovieDetails(int gridItemIndex, Context context){
         Intent movieDetailsActivityIntent = new Intent(context, MovieDetailActivity.class);
-//        movieDetailsActivityIntent.putExtra(context.getString(R.string.MovieDetailsIntentExtra), Integer.toString(gridItemIndex));
-        movieDetailsActivityIntent.putExtra(context.getString(R.string.MovieDetailsIntentExtra), (Parcelable) movieList.get(gridItemIndex));
+        movieDetailsActivityIntent.putExtra(context.getString(R.string.MovieDetailsIntentExtra), movieList.get(gridItemIndex));
         context.startActivity(movieDetailsActivityIntent);
     }
 
