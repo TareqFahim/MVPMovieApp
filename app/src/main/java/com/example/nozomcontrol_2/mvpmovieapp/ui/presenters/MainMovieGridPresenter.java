@@ -58,6 +58,7 @@ public class MainMovieGridPresenter  {
     private void fillPostersURLList(){
         for (int i = 0; i < movieList.size(); i++) {
             postersURL.add("http://image.tmdb.org/t/p/w185" + movieList.get(i).getPosterPath() + "?api_key=" + API_KEY);
+            movieList.get(i).setPosterPath("http://image.tmdb.org/t/p/w185" + movieList.get(i).getPosterPath() + "?api_key=" + API_KEY);
         }
     }
 

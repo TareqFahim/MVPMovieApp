@@ -14,12 +14,5 @@ public class MovieDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_detail);
-        Intent intent = getIntent();
-        MovieInfo movieInfo = intent.getParcelableExtra(getString(R.string.MovieDetailsIntentExtra));
-//        if(intent.hasExtra(getString(R.string.MovieDetailsIntentExtra))){
-//            String itemIndex = intent.getStringExtra(getString(R.string.MovieDetailsIntentExtra));
-//            Toast.makeText(this, itemIndex, Toast.LENGTH_SHORT).show();
-//        }else
-//            Toast.makeText(this, "Wrbna Fady", Toast.LENGTH_SHORT).show();
     }
 }
