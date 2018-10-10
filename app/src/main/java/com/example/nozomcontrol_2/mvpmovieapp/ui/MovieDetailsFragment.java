@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.nozomcontrol_2.mvpmovieapp.R;
 import com.example.nozomcontrol_2.mvpmovieapp.data.MovieInfo;
@@ -27,6 +28,9 @@ import butterknife.ButterKnife;
 public class MovieDetailsFragment extends Fragment implements MovieDetailsPresenter.ViewUpdateCallback {
     @BindView(R.id.movie_details_fragment_imageview)
     ImageView imageView;
+//    @BindView(R.id.toolbar)
+//    Toolbar toolbar;
+
     MovieDetailsPresenter movieDetailsPresenter;
 
     @Nullable
@@ -43,6 +47,7 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsPresen
         super.onStart();
         Intent intent = getActivity().getIntent();
         movieDetailsPresenter.getMovieDetailsInfo(intent);
+//        toolbar.setTitle("Venom");
     }
 
     @Override
