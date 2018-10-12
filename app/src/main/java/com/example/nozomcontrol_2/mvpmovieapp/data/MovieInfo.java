@@ -35,6 +35,9 @@ public class MovieInfo implements Parcelable {
     @Expose
     private String id;
 
+    @SerializedName("backdrop_path")
+    private String backdropPath;
+
     protected MovieInfo(Parcel in) {
         posterPath = in.readString();
         title = in.readString();
@@ -42,6 +45,7 @@ public class MovieInfo implements Parcelable {
         releaseDate = in.readString();
         voteAverage = in.readString();
         id = in.readString();
+        backdropPath = in.readString();
     }
 
     public static final Creator<MovieInfo> CREATOR = new Creator<MovieInfo>() {
@@ -90,6 +94,9 @@ public class MovieInfo implements Parcelable {
     public String getId() { return id; }
     public void setId(String id){this.id = id;}
 
+    public String getBackdropPath() { return backdropPath; }
+    public void setBackdropPath(String backdropPath){this.backdropPath = backdropPath;}
+
     @Override
     public int describeContents() {
         return 0;
@@ -103,5 +110,6 @@ public class MovieInfo implements Parcelable {
         dest.writeString(releaseDate);
         dest.writeString(voteAverage);
         dest.writeString(id);
+        dest.writeString(backdropPath);
     }
 }

@@ -1,7 +1,6 @@
 package com.example.nozomcontrol_2.mvpmovieapp.ui;
 
 import android.content.Intent;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -27,7 +26,7 @@ import butterknife.ButterKnife;
  */
 
 public class MovieDetailsFragment extends Fragment implements MovieDetailsPresenter.ViewUpdateCallback {
-    @BindView(R.id.movie_details_fragment_imageview)
+    @BindView(R.id.movie_details_fragment_collapsing_toolbar_imageview)
     ImageView collapsingToolbarImageView;
     @BindView(R.id.movie_details_fragment_toolbar)
     Toolbar movieDetailsFragmentToolbar;
@@ -56,7 +55,7 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsPresen
 
     @Override
     public void updateMovieDetailsView(MovieInfo movieInfo) {
-        Picasso.get().load(movieInfo.getPosterPath()).into(collapsingToolbarImageView);
+        Picasso.get().load(movieInfo.getBackdropPath()).into(collapsingToolbarImageView);
         movieDetailsCollapsingToolbar.setTitle(movieInfo.getTitle());
 //        movieDetailsCollapsingToolbar.setExpandedTitleTextAppearance(R.style.Shadow);
         movieDetailsCollapsingToolbar.setExpandedTitleColor(getResources().getColor(R.color.transparent));
