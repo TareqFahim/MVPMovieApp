@@ -73,6 +73,12 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsPresen
         movieDetailsTitleTextView.setText(movieInfo.getTitle());
         movieDetailsRateTextView.setText(movieInfo.getVoteAverage());
         movieDetailsReleaseDateTextView.setText(movieInfo.getReleaseDate());
-//        movieDetailsToolbar.setNavigationIcon(getResources().getDrawable(R.drawable.ic_outline_arrow_back_24px_white));
+        movieDetailsToolbar.setNavigationIcon(R.drawable.ic_outline_arrow_back_24px);
+        movieDetailsToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().onBackPressed();
+            }
+        });
     }
 }
