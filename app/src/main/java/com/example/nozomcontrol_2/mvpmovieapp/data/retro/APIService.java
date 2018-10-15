@@ -1,5 +1,6 @@
 package com.example.nozomcontrol_2.mvpmovieapp.data.retro;
 
+import com.example.nozomcontrol_2.mvpmovieapp.data.MovieTrailerList;
 import com.example.nozomcontrol_2.mvpmovieapp.data.MoviesList;
 
 import java.util.List;
@@ -18,5 +19,5 @@ public interface APIService {
     Call<MoviesList> getMoviesList(@Path("sortType") String sortType, @Query("api_key") String apiKey);
 
     @GET("{movieID}/videos")
-    Call<List<String>> getMovieTrailers(@Path("movieID") String movieID, @Query("api_key") String apiKey);
+    Call<MovieTrailerList> getMovieTrailers(@Path("movieID") String movieID, @Query("api_key") String apiKey);
 }
