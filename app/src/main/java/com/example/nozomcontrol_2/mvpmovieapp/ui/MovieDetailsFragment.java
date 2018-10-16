@@ -6,6 +6,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,10 +18,13 @@ import android.widget.TextView;
 
 import com.example.nozomcontrol_2.mvpmovieapp.R;
 import com.example.nozomcontrol_2.mvpmovieapp.data.MovieInfo;
+import com.example.nozomcontrol_2.mvpmovieapp.ui.adapters.MovieTrailerAdapter;
 import com.example.nozomcontrol_2.mvpmovieapp.ui.presenters.MovieDetailsPresenter;
 import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +50,8 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsPresen
     ImageView movieDetailsPosterImageView;
     @BindView(R.id.movie_details_fragment_toolbar)
     Toolbar movieDetailsToolbar;
+    @BindView(R.id.movie_details_fragment_trailers_rv)
+    RecyclerView movieTrailerRV;
 
     MovieDetailsPresenter movieDetailsPresenter;
 
@@ -53,6 +61,9 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsPresen
         View rootview = inflater.inflate(R.layout.movie_details_fragment, container);
         ButterKnife.bind(this, rootview);
         movieDetailsPresenter = new MovieDetailsPresenter(getActivity(), this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        movieTrailerRV.setLayoutManager(layoutManager);
+        movieTrailerRV.setHasFixedSize(true);
         return rootview;
     }
 
@@ -80,5 +91,11 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsPresen
                 getActivity().onBackPressed();
             }
         });
+    }
+
+    @Override
+    public void addMovieTrailers(List<String> movieTrailersUrlList, List<String> movieTrailersThumbnailUrlList) {
+        MovieTrailerAdapter movieTrailersAdapter = new MovieTrailerAdapter(getActivity(), movieTrailersThumbnailUrlList);
+        movieTrailerRV.setAdapter(movieTrailersAdapter);
     }
 }

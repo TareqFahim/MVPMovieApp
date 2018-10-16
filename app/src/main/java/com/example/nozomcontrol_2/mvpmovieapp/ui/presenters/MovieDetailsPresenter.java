@@ -30,6 +30,7 @@ public class MovieDetailsPresenter {
     private List<MovieTrailer> movieTrailers;
     private String TRAILERS_BASE_URL;
     private List<String> movieTrailersUrlList;
+    private List<String> movieTrailersThumbnailsUrlList;
 
     public MovieDetailsPresenter(Context context, ViewUpdateCallback viewUpdateCallback) {
         this.mContext = context;
@@ -40,8 +41,8 @@ public class MovieDetailsPresenter {
     public void getMovieDetailsInfo(Intent intent){
         if(intent.hasExtra(mContext.getString(R.string.MovieDetailsIntentExtra))){
             MovieInfo movieInfo = intent.getParcelableExtra(mContext.getString(R.string.MovieDetailsIntentExtra));
-            mViewUpdateCallback.updateMovieDetailsView(movieInfo);
             loadMoviesTrailersFromServer(movieInfo.getId());
+            mViewUpdateCallback.updateMovieDetailsView(movieInfo);
         }
     }
 
@@ -53,6 +54,7 @@ public class MovieDetailsPresenter {
             public void onResponse(Call<MovieTrailerList> call, Response<MovieTrailerList> response) {
                 movieTrailers = response.body().getMovieTrailers();
                 fillTrailersUrlList();
+                mViewUpdateCallback.addMovieTrailers(movieTrailersUrlList, movieTrailersThumbnailsUrlList);
             }
 
             @Override
@@ -64,8 +66,10 @@ public class MovieDetailsPresenter {
 
     private void fillTrailersUrlList(){
         movieTrailersUrlList = new ArrayList<>();
+        movieTrailersThumbnailsUrlList = new ArrayList<>();
         for (int i = 0; i < movieTrailers.size(); i++) {
             movieTrailersUrlList.add(TRAILERS_BASE_URL + movieTrailers.get(i).getTrailer_key());
+            movieTrailersThumbnailsUrlList.add("http://img.youtube.com/vi/" + movieTrailers.get(i).getTrailer_key() + "/0.jpg");
         }
     }
 
@@ -75,5 +79,6 @@ public class MovieDetailsPresenter {
 
     public interface ViewUpdateCallback {
         void updateMovieDetailsView(MovieInfo movieInfo);
+        void addMovieTrailers(List<String> movieTrailersUrlList, List<String> movieTrailersThumbnailUrlList);
     }
 }
