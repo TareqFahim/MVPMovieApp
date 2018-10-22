@@ -2,6 +2,7 @@ package com.example.nozomcontrol_2.mvpmovieapp.ui.presenters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import com.example.nozomcontrol_2.mvpmovieapp.BuildConfig;
 import com.example.nozomcontrol_2.mvpmovieapp.R;
@@ -62,6 +63,12 @@ public class MovieDetailsPresenter {
 
             }
         });
+    }
+
+    public void viewMovieTrailer(int itemIndex){
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(movieTrailersUrlList.get(itemIndex)));
+        mContext.startActivity(intent);
     }
 
     private void fillTrailersUrlList(){

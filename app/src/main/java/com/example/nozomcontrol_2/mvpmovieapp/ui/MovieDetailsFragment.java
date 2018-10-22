@@ -6,7 +6,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,8 +21,6 @@ import com.example.nozomcontrol_2.mvpmovieapp.ui.adapters.MovieTrailerAdapter;
 import com.example.nozomcontrol_2.mvpmovieapp.ui.presenters.MovieDetailsPresenter;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -33,7 +30,7 @@ import butterknife.ButterKnife;
  * Created by M.Dhemy on 08/10/2018.
  */
 
-public class MovieDetailsFragment extends Fragment implements MovieDetailsPresenter.ViewUpdateCallback {
+public class MovieDetailsFragment extends Fragment implements MovieDetailsPresenter.ViewUpdateCallback, MovieTrailerAdapter.MovieTrailersGridClickListner {
     @BindView(R.id.movie_details_fragment_collapsing_toolbar_imageview)
     ImageView collapsingToolbarImageView;
     @BindView(R.id.movie_details_description_textView)
@@ -95,7 +92,12 @@ public class MovieDetailsFragment extends Fragment implements MovieDetailsPresen
 
     @Override
     public void addMovieTrailers(List<String> movieTrailersUrlList, List<String> movieTrailersThumbnailUrlList) {
-        MovieTrailerAdapter movieTrailersAdapter = new MovieTrailerAdapter(getActivity(), movieTrailersThumbnailUrlList);
+        MovieTrailerAdapter movieTrailersAdapter = new MovieTrailerAdapter(getActivity(), movieTrailersThumbnailUrlList, this);
         movieTrailerRV.setAdapter(movieTrailersAdapter);
+    }
+
+    @Override
+    public void onTrailerGridItemClick(int itemIndex) {
+        movieDetailsPresenter.viewMovieTrailer(itemIndex);
     }
 }

@@ -23,10 +23,12 @@ import butterknife.ButterKnife;
 public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapter.MovieTrailerViewHolder> {
     private Context context;
     private List<String> mMovieTrailersThumbnail;
+    private MovieTrailersGridClickListner mMovieTrailersGridClickListner;
 
-    public MovieTrailerAdapter(Context context, List<String> movieTrailerThumbnail) {
+    public MovieTrailerAdapter(Context context, List<String> movieTrailerThumbnail, MovieTrailersGridClickListner mMovieTrailersGridClickListner) {
         this.context = context;
         this.mMovieTrailersThumbnail = movieTrailerThumbnail;
+        this.mMovieTrailersGridClickListner = mMovieTrailersGridClickListner;
     }
 
     @NonNull
@@ -63,7 +65,12 @@ public class MovieTrailerAdapter extends RecyclerView.Adapter<MovieTrailerAdapte
 
         @Override
         public void onClick(View v) {
-
+            int clickedItemPosition = getAdapterPosition();
+            mMovieTrailersGridClickListner.onTrailerGridItemClick(clickedItemPosition);
         }
+    }
+
+    public interface MovieTrailersGridClickListner{
+        public void onTrailerGridItemClick(int itemIndex);
     }
 }
